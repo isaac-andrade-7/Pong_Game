@@ -6,6 +6,7 @@ public class Main {
         PongGame pongGame = new PongGame();
         pongGame.start();
         pongGame.teste();
+        //qualquer coisa aqui
     }
 
 }
