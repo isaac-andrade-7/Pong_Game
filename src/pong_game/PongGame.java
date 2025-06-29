@@ -2,7 +2,8 @@ package pong_game;
 
 public class PongGame {
 
-	int pontuacao = 0;
+	int pontuacaoJogador1 = 0;
+	int pontuacaoJogador2 = 0;
 	
 	public PongGame() {
 		//tioivo
