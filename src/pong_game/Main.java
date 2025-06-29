@@ -44,7 +44,7 @@ public class Main extends Canvas implements Runnable{
 	    while (true) {
 	        repaint(); // redesenha a tela
 	        try {
-	            Thread.sleep(16); // ~60 FPS
+	            Thread.sleep(16); //60 FPS
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }
