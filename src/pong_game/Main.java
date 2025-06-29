@@ -32,7 +32,6 @@ public class Main extends Canvas implements Runnable{
 	
 	@Override
 	public void paint(Graphics g) {
-	    // Exemplo simples: desenhar uma bola
 	    g.setColor(Color.BLACK);
 	    g.fillRect(0, 0, WIDTH, HEIGHT); // fundo preto
 
