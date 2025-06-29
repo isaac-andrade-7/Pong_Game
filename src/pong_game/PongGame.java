@@ -6,5 +6,9 @@ public class PongGame {
         // Game starting logic goes here
         System.out.println("Pong Game Started!");
     }
+    
+    public void teste() {
+    	System.out.println("Teste");
+    }
 
 }
