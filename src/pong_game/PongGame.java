@@ -2,6 +2,8 @@ package pong_game;
 
 public class PongGame {
 
+	int pontuacao = 0;
+	
 	public PongGame() {
 		//tioivo
 	}
@@ -14,6 +16,7 @@ public class PongGame {
     public void teste() {
     	System.out.println("Teste");
     }
+    
     
 
 }
