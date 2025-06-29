@@ -87,18 +87,18 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	    }
 	}
 
-	@Override
+	
 	public void run() {
 	    while (true) {
 	        update(); // atualiza a posição da bolinha
 	        repaint(); // redesenha a tela
-	        try {
+	       /* try {
 	            Thread.sleep(16); //60 FPS
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
-	        }
+	        } */
 	    }
-	}
+	} 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
