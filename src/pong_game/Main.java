@@ -4,9 +4,13 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Main extends Canvas implements Runnable, KeyListener {
@@ -18,6 +22,7 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	private int ballX = 220;
 	private int ballY = 220;
 	private int ballSpeed = 5;
+	private Image ballImage;
 	
 	private boolean upPressed = false;
 	private boolean downPressed = false;
@@ -28,6 +33,14 @@ public class Main extends Canvas implements Runnable, KeyListener {
         this.setPreferredSize(new Dimension(WIDTH, HEIGTH));
         this.addKeyListener(this);
         this.setFocusable(true);
+        
+        // Carrega a imagem da bolinha
+        try {
+            ballImage = ImageIO.read(new File("img/isaac-ball.png"));
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar a imagem: " + e.getMessage());
+            ballImage = null;
+        }
     }
     
     public static void main(String[] args) {
@@ -48,8 +61,14 @@ public class Main extends Canvas implements Runnable, KeyListener {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGTH); // fundo preto
 
-        g.setColor(Color.WHITE);
-        g.fillOval(ballX, ballY, 20, 20); // bolinha controlável
+        // Desenha a imagem da bolinha se ela foi carregada com sucesso
+        if (ballImage != null) {
+            g.drawImage(ballImage, ballX, ballY, 20, 20, null);
+        } else {
+            // Se a imagem não foi carregada, desenha uma bolinha branca
+            g.setColor(Color.WHITE);
+            g.fillOval(ballX, ballY, 20, 20);
+        }
 	}
 	
 	private void update() {
