@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
 
@@ -45,7 +46,6 @@ public class Main extends Canvas implements Runnable, KeyListener {
     
     public static void main(String[] args) {
 		Main main = new Main();
-		new Thread(main).start();
 		
 		JFrame janela = new JFrame("Pong_Game");
         janela.add(main);
@@ -54,6 +54,9 @@ public class Main extends Canvas implements Runnable, KeyListener {
         janela.pack();
         janela.setLocationRelativeTo(null);
         janela.setVisible(true);
+        
+        // Inicia a thread depois da janela estar visível
+        new Thread(main).start();
 	}
 	
 	@Override
@@ -86,19 +89,42 @@ public class Main extends Canvas implements Runnable, KeyListener {
 	        ballX += ballSpeed;
 	    }
 	}
-
 	
+	private void render(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, WIDTH, HEIGTH); // fundo preto
+
+        // Desenha a imagem da bolinha se ela foi carregada com sucesso
+        if (ballImage != null) {
+            g.drawImage(ballImage, ballX, ballY, 20, 20, null);
+        } else {
+            // Se a imagem não foi carregada, desenha uma bolinha branca
+            g.setColor(Color.WHITE);
+            g.fillOval(ballX, ballY, 20, 20);
+        }
+	}
+
+	@Override
 	public void run() {
+	    this.createBufferStrategy(2);
+	    BufferStrategy bs = this.getBufferStrategy();
+	    
 	    while (true) {
 	        update(); // atualiza a posição da bolinha
-	        repaint(); // redesenha a tela
-	       /* try {
-	            Thread.sleep(16); //60 FPS
+	        
+	        // Desenha usando BufferStrategy
+	        Graphics g = bs.getDrawGraphics();
+	        render(g);
+	        g.dispose();
+	        bs.show();
+	        
+	        try {
+	            Thread.sleep(8); // 120 FPS aproximadamente
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
-	        } */
+	        }
 	    }
-	} 
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
